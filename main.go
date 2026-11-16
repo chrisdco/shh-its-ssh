@@ -163,7 +163,7 @@ type model struct {
 }
 
 // homeNav lists the landing-page sections in order.
-var homeNav = []string{"Creations(soon)", "Reflections", "Contacts", "Guestbook"}
+var homeNav = []string{"Creations", "Reflections", "Contacts", "Guestbook"}
 
 // articles back the Reflections section. Set `body` to Markdown to publish a
 // full essay (it renders scrollable via glamour); without one, a stub is shown.
@@ -745,10 +745,15 @@ func (m model) viewContacts() string {
 
 func (m model) viewCreations() string {
 	out := m.styles.title.Render("Creations") + "\n" + m.styles.dim.Render("──────────────") + "\n\n"
-	out += m.styles.body.Render("Projects and experiments are being curated here.") + "\n"
-	out += m.styles.dim.Render("Check back soon — or find work-in-progress on GitHub.") + "\n\n"
-	clickableLink := m.renderLink(m.styles.body.Render("github.com/ChrisDc777"), "https://github.com/ChrisDc777")
-	out += m.styles.name.Render("GH ") + "  " + clickableLink + "\n\n"
+	maxWidth := m.width - 6
+	if maxWidth > 72 {
+		maxWidth = 72
+	}
+	for _, c := range creations {
+		out += m.renderLink(m.styles.name.Render(c.name), c.url) + "\n"
+		out += m.styles.body.Render(m.wrapText(c.summary, maxWidth)) + "\n\n"
+	}
+	out += m.styles.dim.Render("More on ") + m.renderLink(m.styles.body.Render("github.com/chrisdco"), "https://github.com/chrisdco") + "\n\n"
 	out += m.styles.hint.Render("[esc] back")
 	return "\n" + out
 }

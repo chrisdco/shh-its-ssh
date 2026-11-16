@@ -146,7 +146,7 @@ func TestRunCommand(t *testing.T) {
 	if out, code := runCommand([]string{"help"}); code != 0 || !strings.Contains(out, "scp") {
 		t.Errorf("help should list scp downloads, code=%d:\n%s", code, out)
 	}
-	if out, _ := runCommand([]string{"social"}); !strings.Contains(out, "github.com/ChrisDc777") {
+	if out, _ := runCommand([]string{"social"}); !strings.Contains(out, "github.com/chrisdco") {
 		t.Errorf("social should list links:\n%s", out)
 	}
 	if out, _ := runCommand([]string{"resume"}); !strings.Contains(out, fullName) {
@@ -159,7 +159,7 @@ func TestRunCommand(t *testing.T) {
 
 func TestVCardAndAssets(t *testing.T) {
 	vc := vCard()
-	for _, want := range []string{"BEGIN:VCARD", "VERSION:3.0", "FN:" + fullName, "github.com/ChrisDc777", "END:VCARD"} {
+	for _, want := range []string{"BEGIN:VCARD", "VERSION:3.0", "FN:" + fullName, "github.com/chrisdco", "END:VCARD"} {
 		if !strings.Contains(vc, want) {
 			t.Errorf("vCard missing %q:\n%s", want, vc)
 		}
@@ -175,7 +175,7 @@ func TestVCardAndAssets(t *testing.T) {
 
 func TestPlainPortfolio(t *testing.T) {
 	out := plainPortfolio()
-	if !strings.Contains(out, "software engineer") || !strings.Contains(out, "github.com/ChrisDc777") {
+	if !strings.Contains(out, "software engineer") || !strings.Contains(out, "github.com/chrisdco") {
 		t.Errorf("plain portfolio should include bio and links:\n%s", out)
 	}
 }
