@@ -19,10 +19,10 @@ import (
 const fullName = "Chris Dcosta"
 
 const (
-	bioLead  = "is a software engineer building intelligent systems on the internet, developing scalable products and experimenting with AI."
-	bioWork  = "He works across full-stack and backend systems, building APIs, cloud applications, and AI-powered tools."
-	bioEdu   = "Previously, he studied Computer Science Engineering at Symbiosis Institute of Technology, where he built projects in machine learning, computer vision, and AI-driven data systems."
-	bioFocus = "His work sits at the intersection of software engineering, artificial intelligence, and real-world problem solving."
+	bioLead  = "is a software engineer focused on backend systems: APIs, data pipelines, realtime features, and the cloud infrastructure they run on."
+	bioWork  = "He has built search, chat, notifications, and event-driven AWS pipelines in TypeScript and Python, and is comfortable across the stack in React and Next.js."
+	bioEdu   = "He studied Computer Science, with Honors in AI/ML, at Symbiosis Institute of Technology."
+	bioFocus = "He cares about the parts that are easy to demo and hard to get right: retries, idempotency, privacy boundaries, and migrations."
 )
 
 type contact struct {
@@ -31,11 +31,24 @@ type contact struct {
 
 var contacts = []contact{
 	{"IG", "Instagram", "instagram.com/chrisdcosta777", "https://instagram.com/chrisdcosta777"},
-	{"LI", "LinkedIn", "linkedin.com/in/chrisdcosta777", "https://linkedin.com/in/chrisdcosta777"},
-	{"GH", "GitHub", "github.com/ChrisDc777", "https://github.com/ChrisDc777"},
+	{"LI", "LinkedIn", "linkedin.com/in/chrisdco", "https://www.linkedin.com/in/chrisdco/"},
+	{"GH", "GitHub", "github.com/chrisdco", "https://github.com/chrisdco"},
+	{"X ", "X", "x.com/chrisdcodes", "https://x.com/chrisdcodes"},
+	{"WW", "Website", "chrisdco.vercel.app", "https://chrisdco.vercel.app"},
 }
 
-const repoURL = "https://github.com/ChrisDc777/shh-its-ssh"
+const repoURL = "https://github.com/chrisdco/shh-its-ssh"
+
+type creation struct {
+	name, summary, url string
+}
+
+var creations = []creation{
+	{"VimTex", "Realtime collaborative LaTeX editor with Vim keybindings and an AI assistant (Yjs, Cloudflare Durable Objects).", "https://github.com/chrisdco/VimTex"},
+	{"Incline", "Offline-first strength training app with an outbox-based sync engine and explainable coaching.", "https://github.com/chrisdco/incline"},
+	{"Buds", "Live group maps over private realtime channels, with location never stored server-side.", "https://github.com/chrisdco/buds"},
+	{"shh-its-ssh", "This portfolio, served over SSH.", repoURL},
+}
 
 // ── Downloadable assets (served read-only over scp) ───────────────────────────
 
@@ -49,7 +62,7 @@ func vCard() string {
 	for _, c := range contacts {
 		b.WriteString("URL:" + c.url + "\r\n")
 	}
-	b.WriteString("NOTE:Software engineer building intelligent systems. You found this over SSH.\r\n")
+	b.WriteString("NOTE:Software engineer focused on backend systems. You found this over SSH.\r\n")
 	b.WriteString("END:VCARD\r\n")
 	return b.String()
 }

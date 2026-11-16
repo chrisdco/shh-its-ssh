@@ -46,19 +46,19 @@ None. Working tree is clean; no open feature branches.
 
 ## 5. Remaining phases / roadmap (all tracked as issues)
 
-- **Content** — Creations gallery ([#11](https://github.com/ChrisDc777/shh-its-ssh/issues/11)), real Reflection essays ([#4](https://github.com/ChrisDc777/shh-its-ssh/issues/4)).
-- **Distribution** — custom domain ([#15](https://github.com/ChrisDc777/shh-its-ssh/issues/15)), link from website + GitHub profile ([#16](https://github.com/ChrisDc777/shh-its-ssh/issues/16)), browser fallback ([#17](https://github.com/ChrisDc777/shh-its-ssh/issues/17)).
-- **Ops** — stable host key ([#2](https://github.com/ChrisDc777/shh-its-ssh/issues/2)), Railway persistence volume ([#20](https://github.com/ChrisDc777/shh-its-ssh/issues/20)), real host in README ([#5](https://github.com/ChrisDc777/shh-its-ssh/issues/5)).
-- **Tooling** — Dependabot + golangci-lint ([#18](https://github.com/ChrisDc777/shh-its-ssh/issues/18)), Docker build in CI ([#19](https://github.com/ChrisDc777/shh-its-ssh/issues/19)).
+- **Content** — Creations gallery ([#11](https://github.com/chrisdco/shh-its-ssh/issues/11)), real Reflection essays ([#4](https://github.com/chrisdco/shh-its-ssh/issues/4)).
+- **Distribution** — custom domain ([#15](https://github.com/chrisdco/shh-its-ssh/issues/15)), link from website + GitHub profile ([#16](https://github.com/chrisdco/shh-its-ssh/issues/16)), browser fallback ([#17](https://github.com/chrisdco/shh-its-ssh/issues/17)).
+- **Ops** — stable host key ([#2](https://github.com/chrisdco/shh-its-ssh/issues/2)), Railway persistence volume ([#20](https://github.com/chrisdco/shh-its-ssh/issues/20)), real host in README ([#5](https://github.com/chrisdco/shh-its-ssh/issues/5)).
+- **Tooling** — Dependabot + golangci-lint ([#18](https://github.com/chrisdco/shh-its-ssh/issues/18)), Docker build in CI ([#19](https://github.com/chrisdco/shh-its-ssh/issues/19)).
 
 ## 6. Open issues & known bugs
 
-No known functional bugs. Open issues: see [the tracker](https://github.com/ChrisDc777/shh-its-ssh/issues) (#2, #4, #5, #11, #15–#20).
+No known functional bugs. Open issues: see [the tracker](https://github.com/chrisdco/shh-its-ssh/issues) (#2, #4, #5, #11, #15–#20).
 
 **Known limitations (by design):**
-- Presence and (without a volume) the guestbook/visit count are **in-memory** and reset on restart. Persistence needs `DATA_DIR` → a mounted volume ([#20](https://github.com/ChrisDc777/shh-its-ssh/issues/20)).
+- Presence and (without a volume) the guestbook/visit count are **in-memory** and reset on restart. Persistence needs `DATA_DIR` → a mounted volume ([#20](https://github.com/chrisdco/shh-its-ssh/issues/20)).
 - The greeting uses the **server's** clock — SSH doesn't expose the visitor's timezone.
-- Without `SSH_HOST_KEY`, the host key regenerates each fresh deploy → returning visitors see SSH's "HOST IDENTIFICATION HAS CHANGED" warning ([#2](https://github.com/ChrisDc777/shh-its-ssh/issues/2)).
+- Without `SSH_HOST_KEY`, the host key regenerates each fresh deploy → returning visitors see SSH's "HOST IDENTIFICATION HAS CHANGED" warning ([#2](https://github.com/chrisdco/shh-its-ssh/issues/2)).
 
 ## 7. Architecture & key design decisions
 
@@ -102,7 +102,7 @@ Container: `docker build -t shh . && docker run -p 23234:23234 shh`.
 
 Deploy: any host that runs a container and exposes a raw TCP port (Railway today).
 **The Dockerfile is the source of truth for builds** — Railway uses it, and CI does
-*not* currently build it (see [#19](https://github.com/ChrisDc777/shh-its-ssh/issues/19)).
+*not* currently build it (see [#19](https://github.com/chrisdco/shh-its-ssh/issues/19)).
 
 ## 10. Environment variables (no secrets here)
 
@@ -120,17 +120,17 @@ Go 1.24+. Direct deps (see `go.mod` for exact versions):
 
 ## 12. Technical debt & future improvements
 
-- **CI doesn't build the Docker image** — a `go build` passes while the Dockerfile breaks. This already caused a multi-deploy outage (the `COPY main.go` bug). Add a `docker build` step ([#19](https://github.com/ChrisDc777/shh-its-ssh/issues/19)).
-- **No linter / dependency automation** — add golangci-lint + Dependabot ([#18](https://github.com/ChrisDc777/shh-its-ssh/issues/18)).
+- **CI doesn't build the Docker image** — a `go build` passes while the Dockerfile breaks. This already caused a multi-deploy outage (the `COPY main.go` bug). Add a `docker build` step ([#19](https://github.com/chrisdco/shh-its-ssh/issues/19)).
+- **No linter / dependency automation** — add golangci-lint + Dependabot ([#18](https://github.com/chrisdco/shh-its-ssh/issues/18)).
 - **Rate-limiter map isn't pruned** — bounded by unique IPs seen within the window (fine at portfolio scale); add periodic cleanup if traffic grows.
 - **No guestbook moderation** — only length-capped + throttled; consider a profanity/spam filter before heavy promotion.
 - **The TUI can't be reliably e2e-tested over SSH** (static low-volume screens don't flush in headless capture); covered instead by deterministic view-rendering unit tests. Keep that pattern.
-- `articles` has a single stub entry; real essays pending ([#4](https://github.com/ChrisDc777/shh-its-ssh/issues/4)).
+- `articles` has a single stub entry; real essays pending ([#4](https://github.com/chrisdco/shh-its-ssh/issues/4)).
 
 ## 13. Suggested first prompt to resume development
 
 > Read `AGENTS.md` and `PROJECT_HANDOFF.md` first. The SSH portfolio is
-> feature-complete; pick up the **Creations gallery** ([#11](https://github.com/ChrisDc777/shh-its-ssh/issues/11)). Add a `project`
+> feature-complete; pick up the **Creations gallery** ([#11](https://github.com/chrisdco/shh-its-ssh/issues/11)). Add a `project`
 > struct and a `projects` slice rendered as a selectable list like Reflections,
 > with `enter` opening a detail view (reuse the glamour Markdown reader), and a
 > couple of placeholder cards the owner can fill in. Add unit tests that render
